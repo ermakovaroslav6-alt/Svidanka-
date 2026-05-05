@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Свидание</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Playfair Display', serif;
+    background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee);
+    background-size: 400% 400%;
+    animation: gradient 10s ease infinite;
+    color: white;
+    text-align: center;
+    overflow: hidden;
+}
+
+@keyframes gradient {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+
+/* сердце */
+.heart {
+    position: absolute;
+    color: rgba(255,255,255,0.5);
+    animation: float 6s infinite ease-in-out;
+    font-size: 20px;
+}
+
+@keyframes float {
+    0% {transform: translateY(0) scale(1);}
+    50% {transform: translateY(-50px) scale(1.2);}
+    100% {transform: translateY(0) scale(1);}
+}
+
+/* карточка */
+.card {
+    margin: 12% auto;
+    padding: 40px;
+    width: 80%;
+    max-width: 500px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    animation: fadeIn 2s ease;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+h1 {
+    font-size: 50px;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+button {
+    font-size: 22px;
+    padding: 15px 25px;
+    margin: 10px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+.yes {
+    background: white;
+    color: #ff4f7b;
+}
+
+.no {
+    background: #ff4f7b;
+    color: white;
+}
+
+#second {
+    display: none;
+}
+
+input {
+    padding: 15px;
+    width: 80%;
+    border-radius: 15px;
+    border: none;
+    font-size: 18px;
+    margin-top: 15px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- сердечки -->
+<div class="heart" style="left:10%;top:20%;">❤</div>
+<div class="heart" style="left:70%;top:30%;">❤</div>
+<div class="heart" style="left:40%;top:60%;">❤</div>
+
+<div id="first" class="card">
+    <h1>Среда 19:30</h1>
+    <h2>Свидание</h2>
+
+    <button class="yes" onclick="next()">Да</button>
+    <button class="no" onclick="next()">Уверенно Да</button>
+</div>
+
+<div id="second" class="card">
+    <h1>Я очень рад, тогда увидимся ❤️</h1>
+
+    <form id="form">
+        <input type="text" id="msg" placeholder="Напиши сообщение..." required>
+        <br>
+        <button class="yes" type="submit">Отправить</button>
+    </form>
+</div>
+
+<script>
+function next() {
+    document.getElementById("first").style.display = "none";
+    document.getElementById("second").style.display = "block";
+}
+</script>
+
+<!-- EMAILJS -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script>
+emailjs.init("YOUR_PUBLIC_KEY");
+
+document.getElementById("form").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+        message: document.getElementById("msg").value
+    }).then(() => {
+        alert("Сообщение отправлено 💌");
+    });
+});
+</script>
+
+</body>
+</html>
