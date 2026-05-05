@@ -139,12 +139,12 @@ function next() {
 <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
 <script>
-emailjs.init("YOUR_PUBLIC_KEY");
+emailjs.init("ibEWRWsySlnsuuB3f");
 
 document.getElementById("form").addEventListener("submit", function(e){
     e.preventDefault();
 
-    emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+    emailjs.send("service_pf4xaxy", "template_o7g6kld", {
         message: document.getElementById("msg").value
     }).then(() => {
         alert("Сообщение отправлено 💌");
